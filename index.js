@@ -8,6 +8,7 @@ var app = express();
 //Genera una liga estática de los archivos que se indiquen para que el servidor los pueda reconocer..
 app.use('/data', express.static(__dirname+'/data'));
 app.use('/static', express.static(__dirname+'/assets'));
+app.use('/static', express.static(__dirname+'/bower_components'));
 
 
 //Get es un método http que obtiene de la raíz del documento una respuesta y un requerimiento. 

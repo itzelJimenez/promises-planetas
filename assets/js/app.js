@@ -25,25 +25,46 @@ function getJSON(url) {
 	});
 };
 
-        	//A la función getJSON se le otorga el parámetro de url
-	        getJSON("data/earth-like-results.json")
+var plantilla = '<div class="card col m3 offset-m1">'+
+				    '<div class="card-image waves-effect waves-block waves-light">'+
+				      '<img class="activator" src="static/img/**imagen**.jpg">'+
+				   '</div>'+
+				    '<div class="card-content">'+
+				      '<span class="card-title activator grey-text text-darken-4">**Planeta**<i class="material-icons right">more_vert</i></span>'+
+				      '<p><a href="#">This is a link</a></p>'+
+				    '</div>'+
+				    '<div class="card-reveal">'+
+				      '<h4 class="card-title grey-text text-darken-4">**PlanetaCard**<i class="material-icons right">close</i></h4>'+
+				      '<h6>Peso: </h6>'+
+				    '</div>'+
+				'</div>';
+//A la función getJSON se le otorga el parámetro de url
+getJSON("data/earth-like-results.json")
 
-	        //.then funciona cuando la promesa se cumplió y necesita un parámetro que devuelva mediante return una nueva promesa.
-	        .then(function(response){
-	        	var arregloPromesas = (response.results.map(function(url){
-	        		return getJSON(url)
-	        	}));
+//.then funciona cuando la promesa se cumplió y necesita un parámetro que devuelva mediante return una nueva promesa.
+.then(function(response){
+	var arregloPromesas = (response.results.map(function(url){
+	 	return getJSON(url)
+	}));
 
-	        	return Promise.all(arregloPromesas);
+	return Promise.all(arregloPromesas);
 
-	        }) //Proporciona el resultado del planeta en indice 0, esta función permite que se ejecute el segundo then.
+}) //Proporciona el resultado del planeta en indice 0, esta función permite que se ejecute el segundo then.
 	
-	        .then(function(arrayPromises){
-	        	console.log(arrayPromises)
-	        	arrayPromises.forEach(function(element){
-	        		var namePlanet = element.pl_name;
-	        		console.log(namePlanet + " " + element.dec);
-	        	});
+.then(function(arrayPromises){
+	var contenedor = document.getElementById('planet-cards');
+	arrayPromises.forEach(function(element){
+		var namePlanet = element.pl_name;
+		console.log(namePlanet)
+		var nuevaPlantilla = plantilla.replace('**Planeta**', namePlanet)
+			.replace('**imagen**', namePlanet)
+			.replace('**PlanetaCard**', namePlanet);
+		contenedor.innerHTML += nuevaPlantilla;
+	});
+	
 
-	        })
-	var plantilla = '';
+});
+
+function imprimirDatos(){
+
+}
