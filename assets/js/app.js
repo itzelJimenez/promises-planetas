@@ -3,13 +3,8 @@ function getJSON(url) {
 
 	//Se Retornará una promesa mediante new Promise por ser el protocolo para devolver promesas (los parametros corresponden a los estados de promesa que son resolver y rechazar) 
 	return new Promise(function(resolve, reject) {
-	            	
-	      	//XMLHttpRequest se declara cuando se quiere obtener data del servidor web
-	      	//Ajax es una instancia del objeto XMLHttpRequest
+	   
 	        var ajax = new XMLHttpRequest();
-	        //El método open() sustituye el getJSON,
-	        //es un método de Ajax para especificar el tipo de petición que quieres hacer al servidor, 
-	        //en este caso es el get, despues se envía con el método .send() un request al servidor.
 	        ajax.open("GET", url);
 	        ajax.send();
 
@@ -31,13 +26,15 @@ var plantilla = '<div class="card col m3 offset-m1">'+
 				   '</div>'+
 				    '<div class="card-content">'+
 				      '<span class="card-title activator grey-text text-darken-4">**Planeta**<i class="material-icons right">more_vert</i></span>'+
-				      '<p><a href="#">This is a link</a></p>'+
 				    '</div>'+
 				    '<div class="card-reveal">'+
 				      '<h4 class="card-title grey-text text-darken-4">**PlanetaCard**<i class="material-icons right">close</i></h4>'+
-				      '<h6>Peso: </h6>'+
+				      '<h6>Date: **fecha**</h6>'+
+				      '<h6>Mass: **masa**</h6>'+
+				      '<h6>Radio: **radio**</h6>'+
 				    '</div>'+
 				'</div>';
+
 //A la función getJSON se le otorga el parámetro de url
 getJSON("data/earth-like-results.json")
 
@@ -55,16 +52,16 @@ getJSON("data/earth-like-results.json")
 	var contenedor = document.getElementById('planet-cards');
 	arrayPromises.forEach(function(element){
 		var namePlanet = element.pl_name;
-		console.log(namePlanet)
+		console.log(element)
 		var nuevaPlantilla = plantilla.replace('**Planeta**', namePlanet)
 			.replace('**imagen**', namePlanet)
-			.replace('**PlanetaCard**', namePlanet);
+			.replace('**PlanetaCard**', namePlanet)
+			.replace('**fecha**', element.pl_disc)
+			.replace('**masa**', element.pl_masse)
+			.replace('**radio**', element.st_rad)
 		contenedor.innerHTML += nuevaPlantilla;
 	});
 	
 
 });
 
-function imprimirDatos(){
-
-}
