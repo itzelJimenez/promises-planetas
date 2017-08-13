@@ -20,7 +20,7 @@ function getJSON(url) {
 	});
 };
 
-var plantilla = '<div class="card col m3 offset-m1">'+
+var plantilla = '<div class="card col m3 offset-m1 s8 offset-s2">'+
 				    '<div class="card-image waves-effect waves-block waves-light">'+
 				      '<img class="activator" src="static/img/**imagen**.jpg">'+
 				   '</div>'+
